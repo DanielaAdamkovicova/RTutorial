@@ -3,57 +3,103 @@ output:
   pdf_document: default
   html_document: default
 ---
-## Domáca úloha 16/10/2020 - funkcie
+## Domáca úloha 22/10/2020 - funkcie (VYPRACOVANIE)
+__Daniela Adamkovičová__
+```{r load-packages, include=FALSE}
+library(stringi)
+```
 
-- Napíšte funkciu s nasledujúcou signatúrou
+
+- Úloha 1: Napíšte funkciu s nasledujúcou signatúrou,
+```{r}
+ combin <- function(n,k)
+  {
+    ...
+ }
+```
+  ktorá vracia kombinačné číslo.
+  $$
+  n \choose k
+  $$
+ __Vypracovanie Ú1__
+
 ```{r}
  combin <- function(n,k)
   {
     if(n < k)
-        return("ERROR")
+      return("ERROR")
       return(factorial(n)/(factorial(n-k)*factorial(k)))
  }
   combin(1,3)
+  combin(10,2)
+  combin(5,2)
 ```
-  ktorá vracia kombinačné číslo 
-  $$
-  n \choose k
-  $$
 
-- Napíšte funkciu s nasledujúcou signatúrou
+
+- Úloha 2: Napíšte funkciu s nasledujúcou signatúrou,
+```{r}
+  integ <- function(f, a, b)
+  {
+    ...  
+  }
+```
+ktorá vypočíta odhad určitého integrálu;
+  $$
+  \int_a^b f(x)dx
+  $$
+a jeho chybu - teda vracia dve hodnoty. Toto sa v R robí tak, že vrátite zoznam `r`, pričom `r$integral` bude hodnota a `r$error` jej chyba.  
+  
+ __Vypracovanie Ú2__
+
+a)
+```{r}
+  integ <- function(f, a, b)
+  {
+  f <- function(x) {x*exp(-x^2)}
+  return(integrate(f, lower = a, upper = b))  
+  }
+integ(,1,2)
+```
+
+b) 
+```{r}
+  integ <- function(f, a, b)
+  {
+  f <- function(x) {x*exp(-x^2)}
+  return(integrate(f, lower = a, upper = b))  
+  }
+integ(,0,Inf)
+```
+c)
 
 ```{r}
   integ <- function(f, a, b)
   {
-  f <- function(x) {1/sqrt(2*pi)*exp(-x^2/2)}
+  f <- function(x) {x*exp(-x^2)}
   return(integrate(f, lower = a, upper = b))  
   }
-integ(,-1.96,1.96)
+integ(,Inf,Inf)
 ```
-  ktorá vypočíta odhad určitého integrálu 
-  $$
-  \int_a^b f(x)dx
-  $$
-  a jeho chybu - teda vracia dve hodnoty. Toto sa v R robí tak, že vrátite zoznam `r`, pričom `r$integral` bude hodnota a `r$error` jej chyba.  
 
-- Napíšte funkciu so signatúrou 
+
+- Úloha 3: Napíšte funkciu so signatúrou, 
   
 ```{r}
   clear.dia <- function(s)
   {
-  stri_trans_general(s, "Latin-ASCII") 
+    ...
   }
-  clear.dia("čučoriedka je najvyčočuriadkovanejšia čučoriedka v čukotskej červnej červeni a čerešni")
 ```
+ 
   ktorá nahradí znaky s diakritikou v textovom reťazci príslušnými znakmi bez diakritiky, teda napríklad
   `Čučoriedka` -> `Cucoriedka`
-  
-  __Návod__: Najjednoduchšie je použiť prekladový "slovník" pre náhradu znakov. 
 
-U každej funkcie ilustrujte na rozumnom počte príkladov, že vaša implementácia funguje.  Nepotrebujem žiadne extra precízne či efektívne implementácie, iba niečo, čo v zásade funguje. 
+ __Vypracovanie Ú3__
 
-
-
-**Riešenia poprosím do budúceho piatku 23. októbra vo forme `.Rmd` súboru.**
-
-
+```{r}
+  clear.dia <- function(s)
+  {
+    stri_trans_general(s, "Latin-ASCII") 
+  }
+    clear.dia("Žeby žaby žuvali žuvačku?")
+```
